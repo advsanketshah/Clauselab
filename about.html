@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Clauselab</title>
+<meta name="description" content="Clauselab is a client-side contract lifecycle management workspace built by Adv. Sanket Shah, a technology lawyer based in Indore, India.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+<section class="page">
+  <div class="container legal-body">
+    <div class="page-header">
+      <span class="page-eyebrow">About</span>
+      <h1 class="page-title">A lawyer's CLM workspace, built in the open.</h1>
+    </div>
+
+    <p>Clauselab is a client-side contract lifecycle management tool. It runs entirely in your browser. There is no server, no account, no telemetry. Your contracts, clauses, and settings live in this browser and nowhere else.</p>
+
+    <p>The tool was built by <a href="https://advsanketshah.github.io/" target="_blank" rel="noopener">Adv. Sanket Shah</a>, a technology lawyer based in Indore, India. Sanket specialises in data privacy, AI governance, and commercial contracts, and serves IT and software companies as external general counsel. Clauselab is a personal project, distributed free of charge, intended to be useful to solo practitioners, in-house counsel, and founders who want a structured workspace without handing their contract data to a third party.</p>
+
+    <h2>Why client-side</h2>
+    <p>Contract data is among the most sensitive material in a business. Counterparty identities, commercial terms, personal data flows, risk allocation, termination triggers. Most CLM tools on the market take that data, store it on their infrastructure, and ask you to trust a privacy policy. That trust is fine for some use cases. It is not fine for every use case.</p>
+    <p>Clauselab takes a different approach. Nothing leaves your device unless you choose to send it. The clause library, the drafter, the repository, and the dashboard all operate on data stored in your browser's IndexedDB and localStorage. The only network request any feature makes is when you run an AI review, and that request goes directly from your browser to the AI provider you select, using a key you supply. Clauselab itself never sees the content.</p>
+
+    <h2>What it includes</h2>
+    <ul>
+      <li><strong>Contracts repository.</strong> Track metadata, status, renewal dates, counterparties, tags, and notes. Search, filter, export, and import as JSON.</li>
+      <li><strong>Clause library.</strong> Sixty-plus practitioner-drafted clauses across categories including confidentiality, indemnification, limitation of liability, data protection (DPDPA 2023 and GDPR), dispute resolution, and boilerplate. Add your own custom clauses.</li>
+      <li><strong>Drafter.</strong> Template-based contract assembly with live preview. Mutual NDA, SaaS Subscription, Consulting Services, and Data Processing Addendum templates included. Export to Word, markdown, or print to PDF.</li>
+      <li><strong>AI review (BYOK).</strong> Supports Google Gemini, OpenAI, and Anthropic. Five review modes: issues and risks, redline suggestions, plain-English summary, DPDPA + GDPR compliance check, and missing-clauses check.</li>
+      <li><strong>Portable workspace.</strong> Export a full backup as JSON. Restore on any other device or browser.</li>
+    </ul>
+
+    <h2>What it is not</h2>
+    <p>Clauselab is a workspace tool. It is not legal advice. It is not a substitute for a lawyer. The clauses and templates in the library are general starting points, not tailored language for your specific transaction. Read every clause, negotiate every deal, and run material drafts past qualified counsel before execution. The <a href="disclaimer.html">Disclaimer</a> sets this out in more detail.</p>
+
+    <h2>Open source and self-hosted</h2>
+    <p>Clauselab is a static site. You can run it locally by opening the files in a browser, host it on GitHub Pages, or drop it on any static host. There are no dependencies at build time. The only runtime dependency is Google Fonts, which you can replace or remove if you prefer.</p>
+
+    <h2>Contact and feedback</h2>
+    <p>For feedback, bug reports, or feature requests, connect with Sanket on <a href="https://www.linkedin.com/in/advsanketshah/" target="_blank" rel="noopener">LinkedIn</a>. For legal consulting enquiries, see the <a href="https://advsanketshah.github.io/contact.html" target="_blank" rel="noopener">contact page</a> on the main portfolio.</p>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>

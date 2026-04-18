@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drafter | Clauselab</title>
+<meta name="description" content="Template-based contract drafter. NDA, SaaS, DPA, and consulting templates. Fill a form, preview in real time, export to Word.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+<section class="page">
+  <div class="container-wide">
+    <div class="page-header">
+      <span class="page-eyebrow">Template assembly</span>
+      <h1 class="page-title">Drafter</h1>
+      <p class="page-lead">Pick a template, fill the fields, watch the draft assemble in real time. Export to Word, markdown, or print. Templates are starting points, not finished agreements. Review with a lawyer before execution.</p>
+    </div>
+
+    <div class="notice notice-info">
+      <strong>Before you use this.</strong> These templates are general-purpose starting points. They are not tailored to your specific transaction. Read every clause, fill in the blanks, and negotiate. Nothing here is legal advice.
+    </div>
+
+    <div class="drafter-grid">
+      <div>
+        <div class="card">
+          <div class="tool-sidebar-title" style="padding: 0;">Templates</div>
+          <div id="template-list" style="margin-top: 0.5rem;"></div>
+        </div>
+        <div class="card" style="margin-top: 1rem;">
+          <div class="tool-sidebar-title" style="padding: 0; margin-bottom: 0.75rem;">Fields</div>
+          <div id="field-form"></div>
+        </div>
+        <div class="card no-print" style="margin-top: 1rem;">
+          <div class="tool-sidebar-title" style="padding: 0; margin-bottom: 0.75rem;">Export</div>
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <button id="btn-export-docx" class="btn btn-accent btn-sm">Export as Word (.doc)</button>
+            <button id="btn-export-md" class="btn btn-secondary btn-sm">Export as Markdown</button>
+            <button id="btn-export-txt" class="btn btn-secondary btn-sm">Export as Plain Text</button>
+            <button id="btn-print" class="btn btn-secondary btn-sm">Print / Save as PDF</button>
+          </div>
+          <div class="text-xs text-tertiary mt-2">Tip: print to PDF from your browser for a shareable copy.</div>
+        </div>
+      </div>
+
+      <div id="drafter-preview" class="drafter-preview">
+        <div class="empty">
+          <div class="empty-title">No template selected</div>
+          <div class="empty-desc">Pick a template on the left to begin.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+<script src="js/drafter.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Review | Clauselab</title>
+<meta name="description" content="Bring-your-own-key AI contract review. Issue spotting, redlines, DPDPA and GDPR compliance checks, plain-English summaries.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+<section class="page">
+  <div class="container-wide">
+    <div class="page-header">
+      <span class="page-eyebrow">AI-assisted review</span>
+      <h1 class="page-title">AI Review</h1>
+      <p class="page-lead">Paste a contract, clause, or DPA. Run issue-spotting, redlines, compliance checks, or plain-English summaries. Bring your own API key. Keys and contract text are sent directly from your browser to the provider you choose. Nothing is stored on any Clauselab server because there isn't one.</p>
+    </div>
+
+    <div class="notice">
+      <strong>BYOK &mdash; Bring Your Own Key.</strong> Your API key is stored in this browser's localStorage and used only to call the provider you select. It is never uploaded anywhere else and is excluded from Clauselab backups. Anyone with access to this browser can read it. Use a dedicated, low-limit key.
+    </div>
+
+    <div class="card mb-3">
+      <h3 style="font-size: 1.05rem; margin-bottom: 1rem;">Provider settings</h3>
+      <div class="form-grid">
+        <div class="field">
+          <label>Provider</label>
+          <select id="ai-provider" class="select"></select>
+        </div>
+        <div class="field">
+          <label>Model</label>
+          <select id="ai-model" class="select"></select>
+        </div>
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>API key</label>
+          <input id="ai-key" class="input" type="password" placeholder="Paste your key — stored locally only" autocomplete="off">
+          <div class="hint" id="key-help"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-grid">
+      <div class="card">
+        <h3 style="font-size: 1.05rem; margin-bottom: 1rem;">Input</h3>
+        <div class="field">
+          <label>Review type</label>
+          <select id="review-type" class="select"></select>
+        </div>
+        <div class="field">
+          <label>Contract or clause text</label>
+          <textarea id="review-text" class="textarea" style="min-height: 300px;" placeholder="Paste the contract, clause, or DPA text here…"></textarea>
+          <div class="hint">Recommended: under 30,000 characters for best quality. Longer drafts may be truncated by the model.</div>
+        </div>
+        <div class="review-actions">
+          <button id="btn-review" class="btn btn-accent">Run review</button>
+          <button id="btn-clear" class="btn btn-ghost btn-sm">Clear</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.05rem; margin: 0;">Output</h3>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btn-copy" class="btn btn-ghost btn-sm">Copy</button>
+            <button id="btn-download-review" class="btn btn-ghost btn-sm">Download</button>
+          </div>
+        </div>
+        <div id="review-output" class="review-output">
+          <div class="text-muted">Output will appear here. Your contract text and API key never leave your browser except when making this one request to the provider you select.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice notice-info mt-4">
+      <strong>About AI output.</strong> Large language models can and do produce confident-sounding errors. Treat every suggestion as a starting point for a lawyer's review, not a final answer. Do not paste attorney-client privileged material into any cloud service unless you have verified the provider's data handling and have client consent.
+    </div>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+<script src="js/review.js"></script>
+</body>
+</html>

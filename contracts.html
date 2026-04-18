@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contracts | Clauselab</title>
+<meta name="description" content="Track contracts with metadata, status, renewal dates, and tags. Client-side storage. Export and import in JSON.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+<section class="page">
+  <div class="container">
+    <div class="page-header">
+      <span class="page-eyebrow">Repository</span>
+      <h1 class="page-title">Contracts</h1>
+      <p class="page-lead">Every contract in this table is stored in your browser only. Nothing is uploaded. Export a JSON backup anytime.</p>
+    </div>
+
+    <div class="page-toolbar">
+      <div class="filter-bar">
+        <input id="search-input" class="input search" placeholder="Search title, counterparty, tags, notes…">
+        <select id="filter-status" class="select"></select>
+        <select id="filter-type" class="select"></select>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button id="btn-import" class="btn btn-secondary btn-sm">Import</button>
+        <input type="file" id="import-file" accept=".json" hidden>
+        <button id="btn-export" class="btn btn-secondary btn-sm">Export</button>
+        <button id="btn-add" class="btn btn-accent btn-sm">+ Add contract</button>
+      </div>
+    </div>
+
+    <div class="text-sm text-muted mb-2"><span id="contract-count">0</span> contracts</div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Effective</th>
+            <th>Expiry</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="contracts-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Add / Edit Modal -->
+<div class="modal-backdrop" id="contract-modal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="contract-modal-title">Add contract</div>
+      <button class="modal-close" data-close>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>Title <span style="color: var(--danger);">*</span></label>
+          <input id="f-title" class="input" placeholder="e.g. SaaS Subscription — Acme Corp">
+        </div>
+        <div class="field"><label>Counterparty</label><input id="f-counterparty" class="input" placeholder="e.g. Acme Technologies Pvt. Ltd."></div>
+        <div class="field"><label>Type</label><select id="f-type" class="select"></select></div>
+        <div class="field"><label>Status</label><select id="f-status" class="select"></select></div>
+        <div class="field"><label>Owner</label><input id="f-owner" class="input" placeholder="Internal owner"></div>
+        <div class="field"><label>Effective date</label><input id="f-effective" type="date" class="input"></div>
+        <div class="field"><label>Expiry date</label><input id="f-expiry" type="date" class="input"></div>
+        <div class="field"><label>Value</label><input id="f-value" type="number" class="input" placeholder="e.g. 250000"></div>
+        <div class="field">
+          <label>Currency</label>
+          <select id="f-currency" class="select">
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="SGD">SGD</option>
+          </select>
+        </div>
+        <div class="field"><label>Governing law</label><input id="f-governing" class="input" placeholder="e.g. India"></div>
+        <div class="field" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 0.5rem;">
+          <input type="checkbox" id="f-renewal" style="width: auto;">
+          <label for="f-renewal" style="margin: 0;">Auto-renews unless terminated</label>
+        </div>
+        <div class="field" style="grid-column: 1 / -1;"><label>Tags (comma-separated)</label><input id="f-tags" class="input" placeholder="e.g. SaaS, DPA, EU"></div>
+        <div class="field" style="grid-column: 1 / -1;"><label>Notes</label><textarea id="f-notes" class="textarea" style="font-family: inherit;" placeholder="Key terms, risks, internal comments…"></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" data-close>Cancel</button>
+      <button id="btn-save" class="btn btn-accent">Save contract</button>
+    </div>
+  </div>
+</div>
+
+<!-- View Modal -->
+<div class="modal-backdrop" id="view-modal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <div class="modal-title" id="view-modal-title">Contract</div>
+      <button class="modal-close" data-close>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="view-modal-body"></div>
+    <div class="modal-footer"><button class="btn btn-secondary" data-close>Close</button></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/contracts.js"></script>
+</body>
+</html>
